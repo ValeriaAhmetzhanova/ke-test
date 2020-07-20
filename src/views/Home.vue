@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Projects</h1>
+    <ProjectList v-bind:projects="allProjects"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapGetters, mapActions } from 'vuex'
+import ProjectList from '@/components/ProjectList'
 
 export default {
   name: 'Home',
+  computed: mapGetters(["allProjects"]),
+  methods: mapActions(['fetchProjects']),
+  async mounted() {
+
+  },
   components: {
-    HelloWorld
+    ProjectList
   }
 }
 </script>
