@@ -1,11 +1,37 @@
 <template>
     <div>
-        <ul>
-            <TodoItem
-                v-for="todo in allProjects[id].todos"
-                v-bind:todo="todo"
-            />
-        </ul>
+        <b-row>
+            <b-col cols="4">
+                <h4>To Do</h4>
+                <ul>
+                    <TodoItem
+                            v-for="todo in allProjects[id].todos"
+                            v-if="todo.status === 'to do'"
+                            v-bind:todo="todo"
+                    />
+                </ul>
+            </b-col>
+            <b-col cols="4">
+                <h4>In Progress</h4>
+                <ul>
+                    <TodoItem
+                            v-for="todo in allProjects[id].todos"
+                            v-if="todo.status === 'in progress'"
+                            v-bind:todo="todo"
+                    />
+                </ul>
+            </b-col>
+            <b-col cols="4">
+                <h4>Done</h4>
+                <ul>
+                    <TodoItem
+                            v-for="todo in allProjects[id].todos"
+                            v-if="todo.status === 'done'"
+                            v-bind:todo="todo"
+                    />
+                </ul>
+            </b-col>
+        </b-row>
     </div>
 </template>
 

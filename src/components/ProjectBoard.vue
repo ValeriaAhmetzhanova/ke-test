@@ -20,3 +20,10 @@
         }
     }
 </script>
+
+<style>
+    h2 {
+        text-align: left;
+        margin: 30px;
+    }
+</style>
