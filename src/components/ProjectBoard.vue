@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h2>{{ allProjects[id].title }}</h2>
+        <h2 contenteditable
+             v-text="projectTitle"
+             @blur="onEdit"></h2>
         <b-button v-b-modal.modal-prevent-closing>New task</b-button>
         <TodoList v-bind:id="id"/>
 
@@ -53,15 +55,22 @@
         components: {
             TodoList
         },
+        mounted() {
+            this.init();
+        },
         data(){
             return {
                 taskTitle: "",
                 taskStatus: "",
-                statusOptions: ['to do', 'in progress', 'done']
+                statusOptions: ['to do', 'in progress', 'done'],
+                projectTitle: ""
             }
         },
         methods: {
             ...mapMutations(["updateProjects"]),
+            init(){
+                this.projectTitle = this.allProjects[this.id].title;
+            },
             resetModal() {
                 this.taskTitle = "";
                 this.taskStatus= "";
@@ -77,8 +86,17 @@
                 this.updateProjects(
                     newProjects
                 );
-                console.log(this.allProjects);
+            },
+            updateTitle() {
+
+            },
+            onEdit(evt){
+                let src = evt.target.innerText
+                this.projectTitle = src
+
+                console.log(this.projectTitle);
             }
+
         }
 
     }
