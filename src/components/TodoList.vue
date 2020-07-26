@@ -50,19 +50,13 @@
         methods: {
             ...mapMutations(["updateProjects"]),
             removeTodo(todoId){
-                // let updatedProjects = this.allProjects;
-                // for (let i = 0; i < updatedProjects.length; i++) {
-                //     if (updatedProjects[i].id === this.id) {
-                //         for (let j=0; j< updatedProjects[i].todos.length; j++) {
-                //             if (updatedProjects[i].todos[j].id === todoId) {
-                //                 updatedProjects[i].todos.slice(j, 1);
-                //             }
-                //         }
-                //     }
-                // }
-                // this.updateProjects(
-                //     updatedProjects
-                // );
+                let updatedProjects = this.allProjects;
+                let projectIndex = updatedProjects.findIndex(project => project.id == this.id);
+                let todoIndex = updatedProjects[projectIndex].todos.findIndex(todo => todo.id == todoId);
+                updatedProjects[projectIndex].todos.splice(todoIndex, 1);
+                this.updateProjects(
+                    updatedProjects
+                );
             }
         }
     }
