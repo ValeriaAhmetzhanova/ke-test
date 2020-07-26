@@ -87,14 +87,17 @@
                     newProjects
                 );
             },
-            updateTitle() {
-
+            updateTitle(title) {
+                let updatedProjects = this.allProjects;
+                updatedProjects[this.id].title = title;
+                this.updateProjects(
+                    updatedProjects
+                );
             },
             onEdit(evt){
-                let src = evt.target.innerText
-                this.projectTitle = src
-
-                console.log(this.projectTitle);
+                let src = evt.target.innerText;
+                this.projectTitle = src;
+                this.updateTitle(src);
             }
 
         }
