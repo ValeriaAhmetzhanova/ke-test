@@ -1,6 +1,7 @@
 <template>
     <li>
         {{ todo.title }}
+        <button @click="$emit('remove-clicked', todo.id)">&times;</button>
     </li>
 </template>
 

@@ -39,8 +39,8 @@ export default {
         allProjects(state){
             return state.projects
         },
-        project(state, id){
-            return state.projects[id]
+        getProjectById: (state) => (projectId) => {
+            return state.projects.find(project => project.id == projectId)
         }
     },
 }

@@ -56,8 +56,9 @@ export default {
     },
     handleSubmit() {
       this.createProject({
-        id: this.allProjects.length,
+        id: Date.now(),
         title: this.title,
+        todos: []
       });
     }
   }

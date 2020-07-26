@@ -46,7 +46,7 @@
     import { mapGetters, mapMutations } from 'vuex'
     import TodoList from "@/components/TodoList";
     export default {
-        computed: mapGetters(["allProjects"]),
+        computed: mapGetters(["allProjects", "getProjectById"]),
         props: {
             id: {
                 required: true
@@ -69,7 +69,7 @@
         methods: {
             ...mapMutations(["updateProjects"]),
             init(){
-                this.projectTitle = this.allProjects[this.id].title;
+                this.projectTitle = this.getProjectById(this.id).title;
             },
             resetModal() {
                 this.taskTitle = "";
@@ -78,18 +78,19 @@
             handleSubmit() {
                 let newProjects = this.allProjects;
                 let newTask = ({
-                    id: newProjects[this.id].todos.length,
+                    id: Date.now(),
                     title: this.taskTitle,
                     status: this.taskStatus
                 });
-                newProjects[this.id].todos.push(newTask);
+                let index = newProjects.findIndex(project => project.id == this.id);
+                newProjects[index].todos.push(newTask);
                 this.updateProjects(
                     newProjects
                 );
             },
             updateTitle(title) {
                 let updatedProjects = this.allProjects;
-                updatedProjects[this.id].title = title;
+                updatedProjects.find(project => project.id == this.id).title = title;
                 this.updateProjects(
                     updatedProjects
                 );
