@@ -2,6 +2,7 @@
     <li>
         <subtask-list
                 :task="todo"
+                :depth="0"
                 v-on:remove-clicked="removeTodo"
         />
     </li>
