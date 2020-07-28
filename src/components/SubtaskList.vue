@@ -1,15 +1,13 @@
 <template>
     <div>
         <div>
-            {{ title }}
+            {{ task.title }}
             <button>&plus;</button>
-            <button @click="$emit('remove-clicked', id)">&times;</button>
+            <button @click="$emit('remove-clicked', task.id)">&times;</button>
         </div>
         <subtask-list
-                v-for="task in tasks"
-                :tasks="task.tasks"
-                :title="task.title"
-                :id="task.id"
+                v-for="task in task.tasks"
+                :task="task"
                 v-on:remove-clicked="handleRemove"
         >
         </subtask-list>
@@ -18,12 +16,12 @@
 
 <script>
     export default {
-        props: [ 'title', 'tasks', 'id' ],
+        props: [ 'task' ],
         name: 'subtask-list',
         methods: {
             handleRemove(todoId) {
                 this.$emit('remove-clicked', todoId);
-            }
+            },
         }
     }
 </script>

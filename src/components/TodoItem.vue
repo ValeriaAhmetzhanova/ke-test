@@ -1,9 +1,7 @@
 <template>
     <li>
         <subtask-list
-                :title="todo.title"
-                :tasks="todo.tasks"
-                :id="todo.id"
+                :task="todo"
                 v-on:remove-clicked="removeTodo"
         />
     </li>
@@ -27,7 +25,6 @@
                     updatedProjects
                 );
             },
-
             filterTasks(tasks, filterId, self) {
                 tasks.forEach(function(task) {
                         task.tasks = task.tasks.filter(s => s.id !== filterId);
