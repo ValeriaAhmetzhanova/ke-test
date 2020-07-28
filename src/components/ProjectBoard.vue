@@ -80,7 +80,8 @@
                 let newTask = ({
                     id: Date.now(),
                     title: this.taskTitle,
-                    status: this.taskStatus
+                    status: this.taskStatus,
+                    subtasks: []
                 });
                 let index = newProjects.findIndex(project => project.id == this.id);
                 newProjects[index].todos.push(newTask);
