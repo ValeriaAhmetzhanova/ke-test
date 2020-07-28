@@ -7,7 +7,7 @@
                     @click="toggleChildren">
                 &or;
             </button>
-            <button>&plus;</button>
+            <button @click="$emit('add-clicked', task.id)">&plus;</button>
             <button @click="$emit('remove-clicked', task.id)">&times;</button>
         </div>
         <subtask-list
@@ -16,6 +16,7 @@
                 :task="task"
                 :depth="depth + 1"
                 v-on:remove-clicked="handleRemove"
+                v-on:add-clicked="handleAdd"
         >
         </subtask-list>
     </div>
@@ -25,7 +26,9 @@
     export default {
         props: [ 'task', 'depth' ],
         data() {
-            return { showChildren: false }
+            return {
+                showChildren: false
+            }
         },
         name: 'subtask-list',
         computed: {
@@ -36,6 +39,9 @@
         methods: {
             handleRemove(todoId) {
                 this.$emit('remove-clicked', todoId);
+            },
+            handleAdd(todoId) {
+                this.$emit('add-clicked', todoId);
             },
             toggleChildren() {
                 this.showChildren = !this.showChildren;

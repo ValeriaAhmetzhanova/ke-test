@@ -81,7 +81,7 @@
                     id: Date.now(),
                     title: this.taskTitle,
                     status: this.taskStatus,
-                    subtasks: []
+                    tasks: []
                 });
                 let index = newProjects.findIndex(project => project.id == this.id);
                 newProjects[index].todos.push(newTask);
