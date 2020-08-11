@@ -3,6 +3,17 @@
         <h2 contenteditable
              v-text="projectTitle"
              @blur="onEdit"></h2>
+        <b-button>
+            <vue-blob-json-csv
+                    @error="handleDownloadError"
+                    tag-name="div"
+                    file-type="json"
+                    :file-name=this.projectTitle
+                    title="Download project"
+                    :data=this.getProjectById(this.id)
+                    confirm="Do you want to download it?"
+            />
+        </b-button>
         <b-button v-b-modal.modal-prevent-closing>New task</b-button>
         <TodoList v-bind:id="id"/>
 
@@ -100,6 +111,9 @@
                 let src = evt.target.innerText;
                 this.projectTitle = src;
                 this.updateTitle(src);
+            },
+            handleDownloadError() {
+                alert("Try again");
             }
 
         }

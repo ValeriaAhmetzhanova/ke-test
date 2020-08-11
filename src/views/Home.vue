@@ -2,6 +2,7 @@
   <div class="home">
     <h1>Projects</h1>
     <b-button v-b-modal.modal-prevent-closing>New project</b-button>
+    <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
     <ProjectList v-bind:projects="allProjects"/>
 
     <b-modal
@@ -46,6 +47,7 @@ export default {
   data() {
     return {
       title: "",
+      uploadedProject: {},
     }
   },
   methods: {
@@ -60,6 +62,28 @@ export default {
         title: this.title,
         todos: []
       });
+    },
+    handleFileUpload(){
+      let file = this.$refs.file.files[0];
+      if (file.type == "application/json") {
+        const fr = new FileReader();
+        fr.onload = e => {
+          const result = JSON.parse(e.target.result);
+          const formatted = JSON.stringify(result, null, 2);
+          this.uploadedProject = result;
+
+          // TODO check if id already exists
+
+          this.createProject({
+            id: this.uploadedProject.id,
+            title: this.uploadedProject.title,
+            todos: this.uploadedProject.todos
+          });
+        };
+        fr.readAsText(file);
+      } else {
+        console.log("no");
+      }
     }
   }
 }
