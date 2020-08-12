@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       title: "",
-      uploadedProject: {},
+      uploadedProject: [],
     }
   },
   methods: {
@@ -60,29 +60,32 @@ export default {
       this.createProject({
         id: Date.now(),
         title: this.title,
-        todos: []
+        tasks: []
       });
     },
     handleFileUpload(){
       let file = this.$refs.file.files[0];
       if (file.type == "application/json") {
-        const fr = new FileReader();
+        let fr = new FileReader();
         fr.onload = e => {
-          const result = JSON.parse(e.target.result);
-          const formatted = JSON.stringify(result, null, 2);
+          let result = JSON.parse(e.target.result);
           this.uploadedProject = result;
-
-          // TODO check if id already exists
-
-          this.createProject({
-            id: this.uploadedProject.id,
-            title: this.uploadedProject.title,
-            todos: this.uploadedProject.todos
-          });
+          let idArray = this.allProjects.map(element => element.id);
+          if (idArray.includes(result.id)) {
+            alert("This project id already loaded");
+          } else if (this.uploadedProject.id && this.uploadedProject.title && this.uploadedProject.tasks) {
+            this.createProject({
+              id: this.uploadedProject.id,
+              title: this.uploadedProject.title,
+              tasks: this.uploadedProject.tasks
+            });
+          } else {
+            alert("Wrong file");
+          }
         };
         fr.readAsText(file);
       } else {
-        console.log("no");
+        alert("Wrong file format");
       }
     }
   }
