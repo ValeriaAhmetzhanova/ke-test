@@ -21,7 +21,8 @@ export default {
                   {id: 32, title: "Todo 8", status: "in progress", tasks: []},
                   {id: 33, title: "Todo 9", status: "done", tasks: []},
                 ]},
-            ]
+        ],
+        search: ''
     },
     mutations: {
         updateProjects(state, projects) {
@@ -29,6 +30,9 @@ export default {
         },
         createProject(state, newProject) {
             state.projects.push(newProject);
+        },
+        updateSearch(state, newSearch) {
+            state.search = newSearch
         }
     },
     actions: {
@@ -46,6 +50,9 @@ export default {
         },
         getProjectById: (state) => (projectId) => {
             return state.projects.find(project => project.id == projectId)
+        },
+        getSearch(state){
+            return state.search
         }
     },
 }

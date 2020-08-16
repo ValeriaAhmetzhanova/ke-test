@@ -1,6 +1,6 @@
 <template>
     <li>
-        {{ id }}
+        {{ title }}
         <router-link :to="{name: 'board', params: {id: id}}">
             View
         </router-link>
@@ -9,10 +9,6 @@
 
 <script>
     export default {
-        props: {
-            id: {
-                required: true
-            }
-        }
+        props: ['id', 'title']
     }
 </script>

@@ -3,7 +3,8 @@
     <h1>Projects</h1>
     <b-button v-b-modal.modal-prevent-closing>New project</b-button>
     <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-    <ProjectList v-bind:projects="allProjects"/>
+    <input type="text" v-model="search" @keyup="filterProjects" placeholder="Search..."/>
+    <ProjectList v-bind:projects="projects"/>
 
     <b-modal
             id="modal-prevent-closing"
@@ -37,9 +38,12 @@ import ProjectList from '@/components/ProjectList'
 
 export default {
   name: 'Home',
-  computed: mapGetters(["allProjects"]),
-  async mounted() {
-
+  computed: mapGetters(["allProjects", "getSearch"]),
+  mounted() {
+    this.search = this.getSearch;
+    this.projects = this.allProjects.filter(project => {
+      return project.title.toLowerCase().includes(this.search.toLowerCase())
+    })
   },
   components: {
     ProjectList
@@ -47,12 +51,14 @@ export default {
   data() {
     return {
       title: "",
+      search: "",
       uploadedProject: [],
+      projects: [],
     }
   },
   methods: {
     ...mapActions(['fetchProjects']),
-    ...mapMutations(['createProject']),
+    ...mapMutations(['createProject', 'updateSearch']),
     resetModal() {
       this.title = ""
     },
@@ -70,7 +76,7 @@ export default {
         fr.onload = e => {
           let result = JSON.parse(e.target.result);
           this.uploadedProject = result;
-          let idArray = this.allProjects.map(element => element.id);
+          let idArray = this.projects.map(element => element.id);
           if (idArray.includes(result.id)) {
             alert("This project id already loaded");
           } else if (this.uploadedProject.id && this.uploadedProject.title && this.uploadedProject.tasks) {
@@ -87,6 +93,12 @@ export default {
       } else {
         alert("Wrong file format");
       }
+    },
+    filterProjects() {
+      this.updateSearch(this.search);
+      this.projects = this.allProjects.filter(project => {
+        return project.title.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   }
 }
