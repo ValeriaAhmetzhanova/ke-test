@@ -27,6 +27,7 @@
                 :depth="depth + 1"
                 v-on:remove-clicked="handleRemove"
                 v-on:add-clicked="handleAdd"
+                v-on:task-title-edit="handleEdit"
         >
         </subtask-list>
     </div>
@@ -59,6 +60,9 @@
             },
             handleAdd(todoId) {
                 this.$emit('add-clicked', todoId);
+            },
+            handleEdit(taskId, taskTitle) {
+                this.$emit('task-title-edit', taskId, taskTitle);
             },
             toggleChildren() {
                 this.showChildren = !this.showChildren;

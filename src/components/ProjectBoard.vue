@@ -136,5 +136,6 @@
     h2 {
         text-align: left;
         margin: 30px;
+        width: fit-content;
     }
 </style>
