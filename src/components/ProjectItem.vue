@@ -1,8 +1,9 @@
 <template>
     <li>
-        {{ title }}
         <router-link :to="{name: 'board', params: {id: id}}">
-            View
+            <div class="m-1 item-container">
+                {{ title }}
+            </div>
         </router-link>
     </li>
 </template>
@@ -12,3 +13,11 @@
         props: ['id', 'title']
     }
 </script>
+
+<style>
+    .item-container {
+        font-size: 20px;
+        color: #2c3e50;
+        padding: 10px;
+    }
+</style>

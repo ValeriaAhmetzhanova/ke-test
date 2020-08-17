@@ -45,14 +45,19 @@ export default {
         }
     },
     getters:{
-        allProjects(state){
+        allProjects(state) {
             return state.projects
         },
         getProjectById: (state) => (projectId) => {
             return state.projects.find(project => project.id == projectId)
         },
-        getSearch(state){
+        getSearch(state) {
             return state.search
+        },
+        filteredProjects(state) {
+            return state.projects.filter(project => {
+                return project.title.toLowerCase().includes(state.search.toLowerCase())
+            })
         }
     },
 }

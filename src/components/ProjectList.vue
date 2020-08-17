@@ -2,7 +2,7 @@
     <div>
         <ul>
             <ProjectItem
-                    v-for="projectItem in projects"
+                    v-for="projectItem in filteredProjects"
                     v-bind:id="projectItem.id"
                     v-bind:title="projectItem.title"
             />
@@ -14,11 +14,10 @@
     import { mapGetters } from 'vuex'
     import ProjectItem from '@/components/ProjectItem'
     export default {
-        computed: mapGetters(["allProjects"]),
+        computed: mapGetters(["filteredProjects"]),
         components: {
             ProjectItem
         },
-        props: ['projects'],
     }
 </script>
 

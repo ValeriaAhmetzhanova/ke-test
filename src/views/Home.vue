@@ -1,10 +1,21 @@
 <template>
   <div class="home">
-    <h1>Projects</h1>
-    <b-button v-b-modal.modal-prevent-closing>New project</b-button>
-    <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-    <input type="text" v-model="search" @keyup="filterProjects" placeholder="Search..."/>
-    <ProjectList v-bind:projects="projects"/>
+    <b-container>
+      <b-row class="mr-auto ml-auto">
+        <b-col cols="4" class="mr-auto p-3 text-left">
+          <input class="input-search" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
+        </b-col>
+        <b-col cols="8" class="p-3 text-right">
+          <b-button variant="link" v-b-modal.modal-prevent-closing>Create</b-button>
+          <label for="file">Import</label>
+          <input class="input-file" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <b-container>
+      <ProjectList />
+    </b-container>
 
     <b-modal
             id="modal-prevent-closing"
@@ -38,12 +49,9 @@ import ProjectList from '@/components/ProjectList'
 
 export default {
   name: 'Home',
-  computed: mapGetters(["allProjects", "getSearch"]),
+  computed: mapGetters(["allProjects", "getSearch", "filteredProjects"]),
   mounted() {
     this.search = this.getSearch;
-    this.projects = this.allProjects.filter(project => {
-      return project.title.toLowerCase().includes(this.search.toLowerCase())
-    })
   },
   components: {
     ProjectList
@@ -53,7 +61,6 @@ export default {
       title: "",
       search: "",
       uploadedProject: [],
-      projects: [],
     }
   },
   methods: {
@@ -76,7 +83,7 @@ export default {
         fr.onload = e => {
           let result = JSON.parse(e.target.result);
           this.uploadedProject = result;
-          let idArray = this.projects.map(element => element.id);
+          let idArray = this.filteredProjects.map(element => element.id);
           if (idArray.includes(result.id)) {
             alert("This project id already loaded");
           } else if (this.uploadedProject.id && this.uploadedProject.title && this.uploadedProject.tasks) {
@@ -94,12 +101,20 @@ export default {
         alert("Wrong file format");
       }
     },
-    filterProjects() {
+    searchChange() {
       this.updateSearch(this.search);
-      this.projects = this.allProjects.filter(project => {
-        return project.title.toLowerCase().includes(this.search.toLowerCase())
-      })
     }
   }
 }
 </script>
+
+<style>
+  .input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+</style>
