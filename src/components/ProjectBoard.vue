@@ -1,21 +1,32 @@
 <template>
     <div>
-        <h2 contenteditable
-             v-text="projectTitle"
-             @blur="onEdit"></h2>
-        <b-button>
-            <vue-blob-json-csv
-                    @error="handleDownloadError"
-                    tag-name="div"
-                    file-type="json"
-                    :file-name=this.projectTitle
-                    title="Download project"
-                    :data=this.getProjectById(this.id)
-                    confirm="Do you want to download it?"
-            />
-        </b-button>
-        <b-button v-b-modal.modal-prevent-closing>New task</b-button>
-        <TodoList v-bind:id="id"/>
+        <b-container>
+            <b-row class="mb-5">
+                <b-col cols="6">
+                    <h2 contenteditable
+                        v-text="projectTitle"
+                        @blur="onEdit">
+                    </h2>
+                </b-col>
+                <b-col cols="6" class="text-right">
+                    <b-button variant="link" class="btn-link">
+                        <vue-blob-json-csv
+                                @error="handleDownloadError"
+                                tag-name="div"
+                                file-type="json"
+                                :file-name=this.projectTitle
+                                title="Download project"
+                                :data=this.getProjectById(this.id)
+                                confirm="Do you want to download it?"
+                        />
+                    </b-button>
+                    <b-button variant="link" v-b-modal.modal-prevent-closing>New task</b-button>
+                </b-col>
+            </b-row>
+
+            <TodoList v-bind:id="id"/>
+        </b-container>
+
 
         <b-modal
                 id="modal-prevent-closing"

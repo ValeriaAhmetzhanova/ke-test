@@ -1,15 +1,16 @@
 <template>
     <div>
-        <div :style="indent">
-            {{ task.title }}
-            <button
-                    v-if="task.tasks.length > 0"
-                    @click="toggleChildren">
-                &or;
-            </button>
-            <button @click="$emit('add-clicked', task.id)">&plus;</button>
-            <button @click="$emit('remove-clicked', task.id)">&times;</button>
-        </div>
+        <b-container :style="indent">
+            <b-row>
+                <b-col cols="6" class="task-item-title" @click="toggleChildren">
+                    {{ task.title }}
+                </b-col>
+                <b-col cols="6">
+                    <b-button variant="link" @click="$emit('add-clicked', task.id)">&plus;</b-button>
+                    <b-button variant="link" @click="$emit('remove-clicked', task.id)">&times;</b-button>
+                </b-col>
+            </b-row>
+        </b-container>
         <subtask-list
                 v-if="showChildren"
                 v-for="task in task.tasks"
@@ -49,3 +50,9 @@
         }
     }
 </script>
+
+<style>
+    .task-item-title {
+        padding: 6px;
+    }
+</style>

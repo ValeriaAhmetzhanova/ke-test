@@ -6,8 +6,8 @@
           <input class="input-search" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
         </b-col>
         <b-col cols="8" class="p-3 text-right">
-          <b-button variant="link" v-b-modal.modal-prevent-closing>Create</b-button>
-          <label for="file">Import</label>
+          <b-button class="btn-create" variant="link" v-b-modal.modal-prevent-closing>Create</b-button>
+          <label class="btn-link" for="file">Import</label>
           <input class="input-file" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         </b-col>
       </b-row>
