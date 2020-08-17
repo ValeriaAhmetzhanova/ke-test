@@ -6,6 +6,7 @@
                     :depth="0"
                     v-on:remove-clicked="removeTodo"
                     v-on:add-clicked="toggleModal"
+                    v-on:task-title-edit="editTaskTitle"
             />
         </li>
         <b-modal
@@ -74,6 +75,13 @@
                     updatedProjects
                 );
             },
+            editTaskTitle(taskId, taskTitle){
+                let updatedProjects = this.allProjects;
+                this.filterEdit(updatedProjects, taskId, taskTitle, this);
+                this.updateProjects(
+                    updatedProjects
+                );
+            },
             filterAdd(tasks, filterId, newTask, self) {
                 tasks.forEach(function(task) {
                     if (task.id == filterId) {
@@ -81,6 +89,16 @@
                     }
                     else {
                         self.filterAdd(task.tasks, filterId, newTask, self);
+                    }
+                });
+            },
+            filterEdit(tasks, filterId, newTitle, self) {
+                tasks.forEach(function(task) {
+                    if (task.id == filterId) {
+                        task.title = newTitle;
+                    }
+                    else {
+                        self.filterEdit(task.tasks, filterId, newTitle, self);
                     }
                 });
             },
