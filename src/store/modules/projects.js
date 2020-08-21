@@ -22,7 +22,8 @@ export default {
                   {id: 33, title: "Todo 9", status: "done", tasks: []},
                 ]},
         ],
-        search: ''
+        search: '',
+        savedSearch: ['one']
     },
     mutations: {
         updateProjects(state, projects) {
@@ -33,6 +34,12 @@ export default {
         },
         updateSearch(state, newSearch) {
             state.search = newSearch
+        },
+        saveSearch(state, newSearch) {
+            if (state.savedSearch.length >= 3) {
+                state.savedSearch.pop();
+            }
+            state.savedSearch.unshift(newSearch);
         }
     },
     actions: {
@@ -58,6 +65,9 @@ export default {
             return state.projects.filter(project => {
                 return project.title.toLowerCase().includes(state.search.toLowerCase())
             })
+        },
+        getSavedSearch(state) {
+            return state.savedSearch
         }
     },
 }

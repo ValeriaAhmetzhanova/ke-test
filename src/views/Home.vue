@@ -4,6 +4,20 @@
       <b-row class="mr-auto ml-auto">
         <b-col cols="4" class="mr-auto p-3 text-left">
           <input class="input-search" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
+          <b-button
+                  v-if="this.search != ''"
+                  variant="link"
+                  @click="handleSearchSave">
+            Save
+          </b-button>
+          <b-container class="p-0">
+            <b-button
+                    v-for="item in getSavedSearch"
+                    variant="link"
+                    @click="setSearch(item)">
+              {{item}}
+            </b-button>
+          </b-container>
         </b-col>
         <b-col cols="8" class="p-3 text-right">
           <b-button class="btn-create" variant="link" v-b-modal.modal-prevent-closing>Create</b-button>
@@ -49,7 +63,7 @@ import ProjectList from '@/components/ProjectList'
 
 export default {
   name: 'Home',
-  computed: mapGetters(["allProjects", "getSearch", "filteredProjects"]),
+  computed: mapGetters(["allProjects", "getSearch", "filteredProjects", "getSavedSearch"]),
   mounted() {
     this.search = this.getSearch;
   },
@@ -65,7 +79,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchProjects']),
-    ...mapMutations(['createProject', 'updateSearch']),
+    ...mapMutations(['createProject', 'updateSearch', 'saveSearch']),
     resetModal() {
       this.title = ""
     },
@@ -75,6 +89,13 @@ export default {
         title: this.title,
         tasks: []
       });
+    },
+    setSearch(selected){
+      this.search = selected;
+      this.searchChange();
+    },
+    handleSearchSave(){
+      this.saveSearch(this.search)
     },
     handleFileUpload(){
       let file = this.$refs.file.files[0];

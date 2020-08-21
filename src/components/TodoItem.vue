@@ -10,13 +10,23 @@
             />
             <b-container class="text-right">
                 <b-button
-                        v-if="!editShow"
                         variant="link"
                         @click="toggleEditShow"
                 >
                     edit
                 </b-button>
                 <b-container v-if="editShow">
+                    <b-row>
+                        <b-col cols="4">
+                            <span>Status</span>
+                        </b-col>
+                        <b-col cols="5">
+                            <b-form-select v-model="taskStatus" :options="['to do', 'in progress', 'done']" size="sm"></b-form-select>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-button variant="link" @click="handleStatusChange(todo.id)">Save</b-button>
+                        </b-col>
+                    </b-row>
                     <b-row>
                         <b-col cols="4">
                             <span>Move to</span>
@@ -82,7 +92,8 @@
                 modalShow: false,
                 taskId: "",
                 moveToSelected: null,
-                editShow: false
+                editShow: false,
+                taskStatus: ""
             }
         },
         methods: {
@@ -148,6 +159,16 @@
             },
             toggleEditShow () {
                 this.editShow = !this.editShow;
+            },
+            handleStatusChange (todoId) {
+                if (this.taskStatus != "") {
+                    let updatedProjects = this.allProjects;
+                    updatedProjects.find(project => project.id == this.projectId).tasks.find(task => task.id == todoId).status = this.taskStatus;
+                    this.updateProjects(
+                        updatedProjects
+                    );
+                }
+                this.toggleEditShow();
             },
             handleTaskMove (todoId) {
                 if (this.moveToSelected != null) {
