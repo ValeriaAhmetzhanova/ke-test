@@ -109,22 +109,6 @@
                     updatedProjects
                 );
             },
-            toggleEditShow () {
-                this.editShow = !this.editShow;
-            },
-            handleTaskMove (todoId) {
-                if (this.moveToSelected != null) {
-                    let updatedProjects = this.allProjects;
-                    let task = updatedProjects.find(project => project.id == this.id).tasks.find(task => task.id == todoId);
-                    let updatedTasks = updatedProjects.find(project => project.id == this.id).tasks.filter(task => task.id != todoId);
-                    updatedProjects.find(project => project.id == this.id).tasks = updatedTasks;
-                    updatedProjects.find(project => project.id == this.moveToSelected).tasks.push(task);
-                    this.updateProjects(
-                        updatedProjects
-                    );
-                }
-                this.toggleEditShow();
-            }
         }
     }
 </script>
