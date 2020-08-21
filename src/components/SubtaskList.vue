@@ -8,15 +8,26 @@
                           @blur="onTitleEdit">
                     </span>
                 </b-col>
-                <b-col cols="6">
+                <b-col cols="4" class="text-right">
                     <b-button
                             variant="link"
-                        v-if="task.tasks.length > 0"
-                        @click="toggleChildren">
+                            v-if="task.tasks.length > 0"
+                            @click="toggleChildren"
+                            class="project-btn">
                         &or;
                     </b-button>
-                    <b-button variant="link" @click="$emit('add-clicked', task.id)">&plus;</b-button>
-                    <b-button variant="link" @click="$emit('remove-clicked', task.id)">&times;</b-button>
+                    <b-button
+                            variant="link"
+                            @click="$emit('add-clicked', task.id)"
+                            class="project-btn">
+                        &plus;
+                    </b-button>
+                    <b-button
+                            variant="link"
+                            @click="$emit('remove-clicked', task.id)"
+                            class="project-btn">
+                        &times;
+                    </b-button>
                 </b-col>
             </b-row>
         </b-container>
@@ -48,7 +59,7 @@
         name: 'subtask-list',
         computed: {
             indent() {
-                return { transform: `translate(${this.depth * 50}px)` }
+                return { transform: `translate(${this.depth * 15}px)` }
             }
         },
         methods: {
@@ -80,4 +91,10 @@
     .task-item-title {
         padding: 6px;
     }
+
+    .btn.project-btn {
+        padding: 6px;
+    }
+
+
 </style>

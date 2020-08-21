@@ -8,6 +8,28 @@
                     v-on:add-clicked="toggleModal"
                     v-on:task-title-edit="editTaskTitle"
             />
+            <b-container class="text-right">
+                <b-button
+                        v-if="!editShow"
+                        variant="link"
+                        @click="toggleEditShow"
+                >
+                    edit
+                </b-button>
+                <b-container v-if="editShow">
+                    <b-row>
+                        <b-col cols="4">
+                            <span>Move to</span>
+                        </b-col>
+                        <b-col cols="5">
+                            <b-form-select v-model="moveToSelected" :options="projectNames" size="sm"></b-form-select>
+                        </b-col>
+                        <b-col cols="3">
+                            <b-button variant="link" @click="handleTaskMove(todo.id)">Save</b-button>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </b-container>
         </li>
         <b-modal
                 v-model="modalShow"
@@ -39,7 +61,18 @@
     import {mapGetters, mapMutations} from "vuex";
     export default {
         props: ["todo", "projectId"],
-        computed: mapGetters(["allProjects"]),
+        computed: {
+            ...mapGetters(["allProjects"]),
+            projectNames() {
+                let projects = [];
+                for (let project of this.allProjects) {
+                    if (project.id != this.projectId){
+                        projects.push({value: project.id, text: project.title})
+                    }
+                }
+                return projects;
+            }
+        },
         components: {
             'subtask-list': SubtaskList
         },
@@ -47,7 +80,9 @@
             return {
                 newTitle: "",
                 modalShow: false,
-                taskId: ""
+                taskId: "",
+                moveToSelected: null,
+                editShow: false
             }
         },
         methods: {
@@ -111,6 +146,22 @@
             resetModal() {
                 this.newTitle = "";
             },
+            toggleEditShow () {
+                this.editShow = !this.editShow;
+            },
+            handleTaskMove (todoId) {
+                if (this.moveToSelected != null) {
+                    let updatedProjects = this.allProjects;
+                    let task = updatedProjects.find(project => project.id == this.projectId).tasks.find(task => task.id == todoId);
+                    let updatedTasks = updatedProjects.find(project => project.id == this.projectId).tasks.filter(task => task.id != todoId);
+                    updatedProjects.find(project => project.id == this.projectId).tasks = updatedTasks;
+                    updatedProjects.find(project => project.id == this.moveToSelected).tasks.push(task);
+                    this.updateProjects(
+                        updatedProjects
+                    );
+                }
+                this.toggleEditShow();
+            }
         }
     }
 </script>

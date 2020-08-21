@@ -9,17 +9,18 @@
                         @dragover.prevent
                         @dragenter.prevent
                 >
-                    <ul>
+                    <ul class="p-0">
                         <li
                                 v-for="todo in getProjectById(id).tasks"
                                 v-if="todo.status === 'to do'"
                                 draggable
                                 @dragstart="startDrag($event, todo)">
-                            <TodoItem
-                                    v-bind:todo="todo"
-                                    v-bind:projectId="id"
-                                    class="drag-el"
-                            />
+                            <div class="drag-el">
+                                <TodoItem
+                                        v-bind:todo="todo"
+                                        v-bind:projectId="id"
+                                />
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -32,17 +33,18 @@
                         @dragover.prevent
                         @dragenter.prevent
                 >
-                    <ul>
+                    <ul class="p-0">
                         <li
                                 v-for="todo in getProjectById(id).tasks"
                                 v-if="todo.status === 'in progress'"
                                 draggable
                                 @dragstart="startDrag($event, todo)">
-                            <TodoItem
-                                    v-bind:todo="todo"
-                                    v-bind:projectId="id"
-                                    class="drag-el"
-                            />
+                            <div class="drag-el">
+                                <TodoItem
+                                        v-bind:todo="todo"
+                                        v-bind:projectId="id"
+                                />
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -55,17 +57,18 @@
                         @dragover.prevent
                         @dragenter.prevent
                 >
-                    <ul>
+                    <ul class="p-0">
                         <li
                                 v-for="todo in getProjectById(id).tasks"
                                 v-if="todo.status === 'done'"
                                 draggable
                                 @dragstart="startDrag($event, todo)">
-                            <TodoItem
-                                    v-bind:todo="todo"
-                                    v-bind:projectId="id"
-                                    class="drag-el"
-                            />
+                            <div class="drag-el">
+                                <TodoItem
+                                        v-bind:todo="todo"
+                                        v-bind:projectId="id"
+                                />
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -77,11 +80,18 @@
 <script>
     import {mapGetters, mapMutations} from "vuex";
     import TodoItem from '@/components/TodoItem'
+    import projects from "../store/modules/projects";
     export default {
         computed: mapGetters(["allProjects","getProjectById"]),
         props: ['id'],
         components: {
             TodoItem
+        },
+        data() {
+            return {
+                moveToSelected: null,
+                editShow: false
+            }
         },
         methods: {
             ...mapMutations(["updateProjects"]),
@@ -98,6 +108,22 @@
                 this.updateProjects(
                     updatedProjects
                 );
+            },
+            toggleEditShow () {
+                this.editShow = !this.editShow;
+            },
+            handleTaskMove (todoId) {
+                if (this.moveToSelected != null) {
+                    let updatedProjects = this.allProjects;
+                    let task = updatedProjects.find(project => project.id == this.id).tasks.find(task => task.id == todoId);
+                    let updatedTasks = updatedProjects.find(project => project.id == this.id).tasks.filter(task => task.id != todoId);
+                    updatedProjects.find(project => project.id == this.id).tasks = updatedTasks;
+                    updatedProjects.find(project => project.id == this.moveToSelected).tasks.push(task);
+                    this.updateProjects(
+                        updatedProjects
+                    );
+                }
+                this.toggleEditShow();
             }
         }
     }
