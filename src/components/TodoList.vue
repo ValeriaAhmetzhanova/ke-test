@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-row>
-            <b-col cols="4">
+            <b-col md="4" sm="12">
                 <h4>To Do</h4>
                 <div
                         class="drop-zone"
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </b-col>
-            <b-col cols="4">
+            <b-col md="4" sm="12">
                 <h4>In Progress</h4>
                 <div
                         class="drop-zone"
@@ -49,7 +49,7 @@
                     </ul>
                 </div>
             </b-col>
-            <b-col cols="4">
+            <b-col md="4" sm="12">
                 <h4>Done</h4>
                 <div
                         class="drop-zone"

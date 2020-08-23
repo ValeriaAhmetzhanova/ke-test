@@ -2,13 +2,13 @@
     <div>
         <b-container :style="indent">
             <b-row>
-                <b-col cols="6" class="task-item-title">
+                <b-col lg="5" sm="12" class="task-item-title">
                     <span contenteditable
                           v-text="taskTitle"
                           @blur="onTitleEdit">
                     </span>
                 </b-col>
-                <b-col cols="4" class="text-right">
+                <b-col lg="6" sm="12" class="todo-menu">
                     <b-button
                             variant="link"
                             v-if="task.tasks.length > 0"
@@ -96,5 +96,10 @@
         padding: 6px;
     }
 
+    @media (min-width: 992px) {
+        .todo-menu {
+            text-align: right;
+        }
+    }
 
 </style>

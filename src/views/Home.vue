@@ -2,7 +2,7 @@
   <div class="home">
     <b-container>
       <b-row class="mr-auto ml-auto">
-        <b-col cols="4" class="mr-auto p-3 text-left">
+        <b-col md="4" sm="12" class="mr-auto p-3 nav--left">
           <input class="input-search" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
           <b-button
                   v-if="this.search != ''"
@@ -19,7 +19,7 @@
             </b-button>
           </b-container>
         </b-col>
-        <b-col cols="8" class="p-3 text-right">
+        <b-col md="8" sm="12" class="p-3 nav--right">
           <b-button class="btn-create" variant="link" v-b-modal.modal-prevent-closing>Create</b-button>
           <label class="btn-link" for="file">Import</label>
           <input class="input-file" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
@@ -137,5 +137,15 @@ export default {
     overflow: hidden;
     position: absolute;
     z-index: -1;
+  }
+  
+  @media (min-width: 768px) {
+    .nav--left {
+      text-align: left;
+    }
+
+    .nav--right {
+      text-align: right;
+    }
   }
 </style>

@@ -2,13 +2,13 @@
     <div>
         <b-container>
             <b-row class="mb-5">
-                <b-col cols="6">
+                <b-col md="6" sm="12">
                     <h2 contenteditable
                         v-text="projectTitle"
                         @blur="onEdit">
                     </h2>
                 </b-col>
-                <b-col cols="6" class="text-right">
+                <b-col md="6" sm="12" class="nav--right">
                     <b-button variant="link" class="btn-link">
                         <vue-blob-json-csv
                                 @error="handleDownloadError"

@@ -16,26 +16,26 @@
                     edit
                 </b-button>
                 <b-container v-if="editShow">
-                    <b-row>
-                        <b-col cols="4">
+                    <b-row class="mb-2">
+                        <b-col cols="4" class="pr-3 pl-0">
                             <span>Status</span>
                         </b-col>
-                        <b-col cols="5">
+                        <b-col cols="5" class="p-0">
                             <b-form-select v-model="taskStatus" :options="['to do', 'in progress', 'done']" size="sm"></b-form-select>
                         </b-col>
-                        <b-col cols="3">
-                            <b-button variant="link" @click="handleStatusChange(todo.id)">Save</b-button>
+                        <b-col cols="3" class="pr-2 pl-2">
+                            <b-button variant="link" @click="handleStatusChange(todo.id)" class="p-0">Save</b-button>
                         </b-col>
                     </b-row>
-                    <b-row>
-                        <b-col cols="4">
+                    <b-row class="mb-2">
+                        <b-col cols="4" class="pr-3 pl-0">
                             <span>Move to</span>
                         </b-col>
-                        <b-col cols="5">
+                        <b-col cols="5" class="p-0">
                             <b-form-select v-model="moveToSelected" :options="projectNames" size="sm"></b-form-select>
                         </b-col>
-                        <b-col cols="3">
-                            <b-button variant="link" @click="handleTaskMove(todo.id)">Save</b-button>
+                        <b-col cols="3" class="pr-2 pl-2">
+                            <b-button variant="link" @click="handleTaskMove(todo.id)" class="p-0">Save</b-button>
                         </b-col>
                     </b-row>
                 </b-container>
