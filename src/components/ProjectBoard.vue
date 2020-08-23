@@ -32,6 +32,9 @@
                 id="modal-prevent-closing"
                 ref="modal"
                 title="New task"
+                ok-only
+                ok-variant="link"
+                ok-title="Save"
                 @show="resetModal"
                 @hidden="resetModal"
                 @ok="handleSubmit"

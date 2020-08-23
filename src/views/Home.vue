@@ -35,6 +35,9 @@
             id="modal-prevent-closing"
             ref="modal"
             title="New project"
+            ok-only
+            ok-variant="link"
+            ok-title="Save"
             @show="resetModal"
             @hidden="resetModal"
             @ok="handleSubmit"
@@ -51,6 +54,7 @@
                   required
           ></b-form-input>
         </b-form-group>
+
       </form>
     </b-modal>
   </div>

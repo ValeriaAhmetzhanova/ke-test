@@ -45,6 +45,9 @@
                 v-model="modalShow"
                 ref="modal"
                 title="New subtask"
+                ok-only
+                ok-variant="link"
+                ok-title="Save"
                 @show="resetModal"
                 @hidden="resetModal"
                 @ok="addTodo"
