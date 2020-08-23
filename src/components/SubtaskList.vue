@@ -31,16 +31,18 @@
                 </b-col>
             </b-row>
         </b-container>
-        <subtask-list
-                v-if="showChildren"
-                v-for="task in task.tasks"
-                :task="task"
-                :depth="depth + 1"
-                v-on:remove-clicked="handleRemove"
-                v-on:add-clicked="handleAdd"
-                v-on:task-title-edit="handleEdit"
-        >
-        </subtask-list>
+        <transition name="fade">
+            <subtask-list
+                    v-if="showChildren"
+                    v-for="task in task.tasks"
+                    :task="task"
+                    :depth="depth + 1"
+                    v-on:remove-clicked="handleRemove"
+                    v-on:add-clicked="handleAdd"
+                    v-on:task-title-edit="handleEdit"
+            >
+            </subtask-list>
+        </transition>
     </div>
 </template>
 
@@ -94,6 +96,13 @@
 
     .btn.project-btn {
         padding: 6px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 
     @media (min-width: 992px) {
