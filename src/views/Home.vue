@@ -3,11 +3,12 @@
     <b-container>
       <b-row class="mr-auto ml-auto">
         <b-col md="4" sm="12" class="mr-auto p-3 nav--left">
-          <input class="input-search" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
+          <input class="input-search mr-2" type="text" v-model="search" @keyup="searchChange" placeholder="Search..."/>
           <b-button
                   v-if="this.search != ''"
                   variant="link"
-                  @click="handleSearchSave">
+                  @click="handleSearchSave"
+                  class="btn-filter--save">
             Save
           </b-button>
           <b-container class="p-0">
@@ -142,6 +143,10 @@ export default {
     overflow: hidden;
     position: absolute;
     z-index: -1;
+  }
+
+  .btn.btn-filter--save {
+    display: contents;
   }
   
   @media (min-width: 768px) {
