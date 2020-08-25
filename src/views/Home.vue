@@ -89,11 +89,13 @@ export default {
       this.title = ""
     },
     handleSubmit() {
-      this.createProject({
-        id: Date.now(),
-        title: this.title,
-        tasks: []
-      });
+      if (this.title.length > 0){
+        this.createProject({
+          id: Date.now(),
+          title: this.title,
+          tasks: []
+        });
+      }
       this.$refs['modal'].toggle();
     },
     setSearch(selected){

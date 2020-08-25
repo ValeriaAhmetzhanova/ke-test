@@ -115,16 +115,18 @@
                 this.taskId = taskId;
             },
             addTodo(){
-                let updatedProjects = this.allProjects;
-                let newTask = ({
-                    id: Date.now(),
-                    title: this.newTitle,
-                    tasks: []
-                });
-                this.filterAdd(updatedProjects, this.taskId, newTask, this);
-                this.updateProjects(
-                    updatedProjects
-                );
+                if (this.newTitle.length > 0) {
+                    let updatedProjects = this.allProjects;
+                    let newTask = ({
+                        id: Date.now(),
+                        title: this.newTitle,
+                        tasks: []
+                    });
+                    this.filterAdd(updatedProjects, this.taskId, newTask, this);
+                    this.updateProjects(
+                        updatedProjects
+                    );
+                }
                 this.$refs['modal'].toggle();
             },
             editTaskTitle(taskId, taskTitle){

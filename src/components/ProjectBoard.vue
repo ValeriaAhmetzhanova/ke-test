@@ -101,18 +101,20 @@
                 this.taskStatus= "";
             },
             handleSubmit() {
-                let newProjects = this.allProjects;
-                let newTask = ({
-                    id: Date.now(),
-                    title: this.taskTitle,
-                    status: this.taskStatus,
-                    tasks: []
-                });
-                let index = newProjects.findIndex(project => project.id == this.id);
-                newProjects[index].tasks.push(newTask);
-                this.updateProjects(
-                    newProjects
-                );
+                if (this.taskTitle.length > 0 && this.taskStatus.length > 0) {
+                    let newProjects = this.allProjects;
+                    let newTask = ({
+                        id: Date.now(),
+                        title: this.taskTitle,
+                        status: this.taskStatus,
+                        tasks: []
+                    });
+                    let index = newProjects.findIndex(project => project.id == this.id);
+                    newProjects[index].tasks.push(newTask);
+                    this.updateProjects(
+                        newProjects
+                    );
+                }
                 this.$refs['modal'].toggle();
             },
             updateTitle(title) {
