@@ -113,6 +113,7 @@
                 this.updateProjects(
                     newProjects
                 );
+                this.$refs['modal'].toggle();
             },
             updateTitle(title) {
                 let updatedProjects = this.allProjects;
