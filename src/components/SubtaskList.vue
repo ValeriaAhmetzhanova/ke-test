@@ -31,8 +31,9 @@
                 </b-col>
             </b-row>
         </b-container>
-        <transition name="fade">
+        <transition-group name="fade">
             <subtask-list
+                    v-bind:key="task.id"
                     v-if="showChildren"
                     v-for="task in task.tasks"
                     :task="task"
@@ -42,7 +43,7 @@
                     v-on:task-title-edit="handleEdit"
             >
             </subtask-list>
-        </transition>
+        </transition-group>
     </div>
 </template>
 
