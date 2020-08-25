@@ -111,7 +111,7 @@ export default {
           this.uploadedProject = result;
           let idArray = this.filteredProjects.map(element => element.id);
           if (idArray.includes(result.id)) {
-            alert("This project id already loaded");
+            alert("This project is already loaded");
           } else if (this.uploadedProject.id && this.uploadedProject.title && this.uploadedProject.tasks) {
             this.createProject({
               id: this.uploadedProject.id,
