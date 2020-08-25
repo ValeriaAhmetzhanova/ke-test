@@ -109,7 +109,7 @@
                     tasks: []
                 });
                 let index = newProjects.findIndex(project => project.id == this.id);
-                newProjects[index].todos.push(newTask);
+                newProjects[index].tasks.push(newTask);
                 this.updateProjects(
                     newProjects
                 );
