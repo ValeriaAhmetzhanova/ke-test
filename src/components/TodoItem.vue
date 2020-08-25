@@ -125,6 +125,7 @@
                 this.updateProjects(
                     updatedProjects
                 );
+                this.$refs['modal'].toggle();
             },
             editTaskTitle(taskId, taskTitle){
                 let updatedProjects = this.allProjects;
