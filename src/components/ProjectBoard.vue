@@ -68,8 +68,9 @@
 </template>
 
 <script>
-    import { mapGetters, mapMutations } from 'vuex'
+    import {mapGetters, mapMutations} from 'vuex'
     import TodoList from "@/components/TodoList";
+
     export default {
         computed: mapGetters(["allProjects", "getProjectById"]),
         props: {
@@ -83,7 +84,7 @@
         mounted() {
             this.init();
         },
-        data(){
+        data() {
             return {
                 taskTitle: "",
                 taskStatus: "",
@@ -93,12 +94,12 @@
         },
         methods: {
             ...mapMutations(["updateProjects"]),
-            init(){
+            init() {
                 this.projectTitle = this.getProjectById(this.id).title;
             },
             resetModal() {
                 this.taskTitle = "";
-                this.taskStatus= "";
+                this.taskStatus = "";
             },
             handleSubmit() {
                 if (this.taskTitle.length > 0 && this.taskStatus.length > 0) {
@@ -124,7 +125,7 @@
                     updatedProjects
                 );
             },
-            onEdit(evt){
+            onEdit(evt) {
                 let src = evt.target.innerText;
                 this.projectTitle = src;
                 this.updateTitle(src);

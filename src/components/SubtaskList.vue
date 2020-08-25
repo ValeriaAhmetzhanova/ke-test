@@ -49,7 +49,7 @@
 
 <script>
     export default {
-        props: [ 'task', 'depth' ],
+        props: ['task', 'depth'],
         data() {
             return {
                 showChildren: false,
@@ -62,7 +62,7 @@
         name: 'subtask-list',
         computed: {
             indent() {
-                return { transform: `translate(${this.depth * 15}px)` }
+                return {transform: `translate(${this.depth * 15}px)`}
             }
         },
         methods: {

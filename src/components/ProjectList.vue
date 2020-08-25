@@ -14,8 +14,9 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
     import ProjectItem from '@/components/ProjectItem'
+
     export default {
         computed: mapGetters(["filteredProjects"]),
         components: {

@@ -81,8 +81,9 @@
     import {mapGetters, mapMutations} from "vuex";
     import TodoItem from '@/components/TodoItem'
     import projects from "../store/modules/projects";
+
     export default {
-        computed: mapGetters(["allProjects","getProjectById"]),
+        computed: mapGetters(["allProjects", "getProjectById"]),
         props: ['id'],
         components: {
             TodoItem
@@ -95,13 +96,13 @@
         },
         methods: {
             ...mapMutations(["updateProjects"]),
-            startDrag (evt, item) {
+            startDrag(evt, item) {
                 evt.dataTransfer.dropEffect = 'move';
                 evt.dataTransfer.effectAllowed = 'move';
                 evt.dataTransfer.setData('itemID', item.id);
 
             },
-            onDrop (evt, list) {
+            onDrop(evt, list) {
                 let itemID = evt.dataTransfer.getData('itemID');
                 let updatedProjects = this.allProjects;
                 updatedProjects.find(project => project.id == this.id).tasks.find(task => task.id == itemID).status = list;
