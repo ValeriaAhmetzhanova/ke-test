@@ -1,11 +1,14 @@
 <template>
     <div>
         <ul>
-            <ProjectItem
-                    v-for="projectItem in filteredProjects"
-                    v-bind:id="projectItem.id"
-                    v-bind:title="projectItem.title"
-            />
+            <transition-group name="fade">
+                <ProjectItem
+                        v-for="projectItem in filteredProjects"
+                        v-bind:id="projectItem.id"
+                        v-bind:title="projectItem.title"
+                        v-bind:key="projectItem.id"
+                />
+            </transition-group>
         </ul>
     </div>
 </template>

@@ -99,13 +99,6 @@
         padding: 6px;
     }
 
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
-
     @media (min-width: 992px) {
         .todo-menu {
             text-align: right;
