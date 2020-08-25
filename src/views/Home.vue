@@ -93,6 +93,7 @@ export default {
         title: this.title,
         tasks: []
       });
+      this.$refs['modal'].toggle();
     },
     setSearch(selected){
       this.search = selected;
