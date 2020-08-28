@@ -16,7 +16,7 @@
                                 file-type="json"
                                 :file-name=this.projectTitle
                                 title="Download project"
-                                :data=this.getProjectById(this.id).data
+                                :data=[this.getProjectById(this.id)]
                                 confirm="Do you want to download it?"
                         />
                     </b-button>

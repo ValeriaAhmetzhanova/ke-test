@@ -112,7 +112,7 @@
                     let fr = new FileReader();
                     fr.onload = e => {
                         let result = JSON.parse(e.target.result);
-                        this.uploadedProject = result;
+                        this.uploadedProject = result[0];
                         let idArray = this.filteredProjects.map(element => element.id);
                         if (idArray.includes(result.id)) {
                             alert("This project is already loaded");
