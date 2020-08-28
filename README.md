@@ -15,5 +15,12 @@ npm run serve
 npm run build
 ```
 
+### Serving production version with docker
+```
+docker build . -t my-app
+
+docker run -p 8080:80 my-app
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
